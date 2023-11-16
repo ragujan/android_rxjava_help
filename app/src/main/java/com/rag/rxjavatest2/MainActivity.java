@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rag.rxjavatest2.pojo.Crypto;
 import com.rag.rxjavatest2.tutorial01.CryptoCurrencyService;
-import com.rag.rxjavatest2.tutorial02.RecylerViewAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
