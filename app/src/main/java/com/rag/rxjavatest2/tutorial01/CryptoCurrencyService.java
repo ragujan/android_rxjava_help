@@ -3,7 +3,7 @@ package com.rag.rxjavatest2.tutorial01;
 
 import com.rag.rxjavatest2.pojo.Crypto;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 

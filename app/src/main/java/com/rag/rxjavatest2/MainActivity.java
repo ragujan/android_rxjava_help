@@ -21,13 +21,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-import io.reactivex.Observable;
-
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -75,11 +75,18 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }).toList().toObservable();
 //
-        Observable.merge(ethObservable.
-                subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).
-                subscribe(this::handleResults,this::handleError));
+        Observable<List<Crypto.Market>> btcObservable = cryptoCurrencyService.getCoinData("btc")
+                .map(result -> Observable.fromIterable(result.ticker.markets))
+                .flatMap(x -> x).filter(y -> {
+                    y.coinName = "btc";
+                    return true;
+                }).toList().toObservable();
 
+
+        Observable.merge(ethObservable, btcObservable)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResults, this::handleError);
     }
     private void handleResults(List<Crypto.Market> marketList){
         if(marketList != null && marketList.size() != 0){

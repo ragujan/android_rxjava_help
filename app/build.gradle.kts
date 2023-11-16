@@ -49,15 +49,21 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 // https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-// https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava2
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava3
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+//    implementation("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+
 // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
 
-// https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava
-    implementation("io.reactivex.rxjava3:rxjava:3.0.2")
+// https://mvnrepository.com/artifact/io.ro.reeactivex.rxjava3/rxjava
 
-    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    // https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava
+    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+
+// https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxandroid
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
 
 }
